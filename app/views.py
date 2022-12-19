@@ -11,9 +11,6 @@ def home(request):
         print('selected city id ',selected_city_id)
         if selected_city_id:
                 hospitals = Hospital.get_all_services_by_cityid(selected_city_id)
-                # services = Services.filter_hospital_services_bycity(selected_city_id)
-                print(hospitals)
-                print('if part executed ')
                 context = {
                 'cities' : cities,
                 'hospitals' : hospitals,
