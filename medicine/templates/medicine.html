@@ -1,0 +1,104 @@
+{% extends "index.html" %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare - Want to help you in emergency</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    {%block content%}
+    <div class="container my-5">
+        <div class="card">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">{{medicine_name}}</h3>
+                    <h6 class="card-subtitle mb-2 text-muted">{{manufacturer}}</h6>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-subtitle mb-2">Active ingredients:</h5>
+                    <ul>
+                        {% for i in composition %}
+                        <li>{{i}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Product Introduction</h5>
+                {% for i in introduction %}
+                <p class="card-text">{{i}}</p>
+                {% endfor %}
+
+                <hr class="border border-success border-2 opacity-50">
+                <h5 class="card-title">Uses of Medicine</h5>
+                <ul>
+                    {% for i in uses %}
+                    <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+                <hr class="border border-success border-2 opacity-50">
+                <h5 class="card-title">Side Effects of Medicine</h5>
+                <p>Most side effects do not require any medical attention and disappear as your body adjusts to the
+                    medicine. Consult your doctor if they persist or if you’re worried about them.</p>
+                <ul>
+                    {% for i in side_effects %}
+                    <li>{{i}}</li>
+                    {% endfor %}
+                </ul>
+                <hr class="border border-success border-2 opacity-50">
+                <h5 class="card-title">How to Use</h5>
+                <p class="card-text">{{how_to_use}}</p>
+                <hr class="border border-success border-2 opacity-50">
+                <h5 class="card-title">Safety Advice</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Warning</th>
+                                <th>Content</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i, j in safety_advice.items %}
+                            <tr>
+                                <td>{{i}}</td>
+                                <td>{{j}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <hr class="border border-success border-2 opacity-50">
+                <h5 class="card-title">Alternative Medications</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Medication Name</th>
+                                <th>Manufacturer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i, j in substitute.items %}
+                            <tr>
+                                <td>{{i}}</td>
+                                <td>{{j}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endblock%}
+</body>
+
+</html>
