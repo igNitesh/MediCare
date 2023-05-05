@@ -1,0 +1,126 @@
+{% extends "index.html" %}
+{% load custom_tags %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MediCare - Want to help you in emergency</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+</head>
+
+<body>
+    {%block content%}
+    <form action="/doctor" method="get" id="my__form">
+        <div class="container row mx-auto my-4">
+            <div class="col">
+                <select id='selected__state' class="form-select" name="state" aria-label="Default select example">
+                    <option value="">State</option>
+                    {%for state in states%}
+                    <option {% is_state_selected selected_state_id state.id %} value="{{state.id}}">{{state.name}}
+                    </option>
+                    {%endfor%}
+                </select>
+            </div>
+            <div class="col">
+                <select id="selected__city" class="form-select" name="city" aria-label="Default select example">
+                    <option value="">City</option>
+                    {%for city in cities%}
+                    <option {% is_city_selected selected_city_id city.id %} value="{{city.id}}">{{city.name}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+            <div class="col">
+                <select id="selected__department" class="form-select" name="department"
+                    aria-label="Default select example">
+                    <option value="">Department</option>
+                    {%for department in departments%}
+                    <option {% is_department_selected selected_department_id department.id %} value="{{department.id}}">
+                        {{department.name}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        window.onload = function () {
+            var select_state = document.getElementById('selected__state')
+            var select_city = document.getElementById('selected__city')
+            var select_department = document.getElementById('selected__department')
+            var form = document.getElementById('my__form')
+
+            var x = function () {
+                console.log("Done...")
+                form.submit()
+            }
+            select_state.onchange = x
+            select_city.onchange = x
+            select_department.onchange = x
+        }
+
+    </script>
+
+    <div class="container-fluids">
+        <table
+            class="table text-center table table-bordered border-secondary table-light table-striped justify-content-sm-center">
+            <thead>
+                <tr>
+                    <th>Hospital</th>
+                    <th>Doctor</th>
+                    <th>Department</th>
+                    <th>Degree</th>
+                    <th>Experience</th>
+                    <th>Available</th>
+                    <th>Fees</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for doctor in doctors%}
+                <tr>
+                    <td>
+                        <b class="text-primary">{{doctor.hospital.name}}</b><br>
+                        <b>Contact: </b>{{doctor.hospital.contact}}<br>
+                        <b>Address: </b>{{doctor.hospital.address}}
+                    </td>
+
+                    <td>
+                        <b class="text-primary">{{doctor.name}}</b><br>
+                        <b>Contact: </b>{{doctor.contact}}<br>
+                    </td>
+
+                    <td>
+                        <b>{{doctor.department}}</b><br>
+                        <b>Specialization: </b>{{doctor.specialization}}<br>
+                    </td>
+
+                    <td>
+                        <b>{{doctor.degree}}</b>
+
+                    </td>
+
+                    <td>
+                        <b>{{doctor.experience}}</b>
+                    </td>
+
+                    <td>
+                        <b>{{doctor.availability_time}}</b><br>
+                        On {{doctor.availability_on}}<br>
+                    </td>
+
+                    <td>{{doctor.fee}}</td>
+                </tr>
+                {% endfor %}
+        </table>
+    </div>
+    {%endblock%}
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
